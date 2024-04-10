@@ -15,6 +15,7 @@ class DiscardSink implements Sink {
   }
 }
 
+// commnd option
 export default abstract class extends Command {
   recorder = this.recorderFromEnv('asyncapi_adoption');
   parser = new Parser();
