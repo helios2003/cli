@@ -7,7 +7,7 @@ import { resolve } from 'path';
 import { load } from '../../models/SpecificationFile';
 
 const { writeFile, readFile } = fPromises;
-const DEFAULT_ASYNCAPI_FILE_NAME = 'asyncapi.yaml';
+const DEFAULT_ASYNCAPI_FILE_NAME = 'asyncapi-test-api.yaml';
 const DEFAULT_ASYNCAPI_TEMPLATE = 'default-example.yaml';
 
 interface IExample{
@@ -149,7 +149,7 @@ export default class NewFile extends Command {
       if (extension==='yml'||extension==='yaml'||extension==='json') {
         fileNameToWriteToDisk=fileName;
       } else {
-        console.log('CLI Support only yml, yaml and json extension for file');
+        console.log('CLI does not suuport any other extensions other than YAML, YML OR JSON');
 
         return;
       }
