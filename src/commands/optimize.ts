@@ -18,6 +18,10 @@ export enum Optimizations {
   MOVE_ALL_TO_COMPONENTS='move-all-to-components',
 }
 
+export enum DisableOptimizations {
+  SCHEMA='schema'
+}
+
 export enum Outputs {
   TERMINAL='terminal',
   NEW_FILE='new-file',
@@ -27,6 +31,7 @@ export default class Optimize extends Command {
   static description = 'optimize asyncapi specification file';
   isInteractive = false;
   selectedOptimizations?: Optimizations[];
+  disableOptimizations?: DisableOptimizations[];
   outputMethod?: Outputs;
 
   static examples = [
@@ -46,6 +51,7 @@ export default class Optimize extends Command {
 
   async run() {
     const { args, flags } = await this.parse(Optimize); //NOSONAR
+    console.log(flags);
     const filePath = args['spec-file'];
 
     try {
@@ -93,7 +99,17 @@ export default class Optimize extends Command {
         moveAllToComponents: this.selectedOptimizations.includes(Optimizations.MOVE_ALL_TO_COMPONENTS),
         removeComponents: this.selectedOptimizations.includes(Optimizations.REMOVE_COMPONENTS),
         reuseComponents: this.selectedOptimizations.includes(Optimizations.REUSE_COMPONENTS)
-      }, output: Output.YAML});
+      }, 
+      disableOptimizationFor: {
+        schema: this.disableOptimizations?.includes(DisableOptimizations.SCHEMA)
+      },
+      output: Output.YAML});
+      // check if the schema is disabled or not
+      if (this.disableOptimizations?.includes(DisableOptimizations.SCHEMA)) {
+        console.log('trueeeeeeeeeeeeeeeeeeeeeeeeee');
+      } else {
+        console.log('falseeeeeeeeeeeeeeeeeeeeeeeeee');
+      }	
 
       this.collectMetricsData(report);
 
