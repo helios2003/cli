@@ -1,0 +1,35 @@
+asyncapi: "2.5.0"
+info:
+  title: Demo API
+  version: "1.0.0"
+channels:
+  channelOne:
+    publish:
+      summary: This is the first sample channel
+      operationId: onMessage
+      message:
+        name: FirstMessage
+        payload:
+          id:
+            type: integer
+            minimum: 0
+            description: Id of the channel
+          sentAt:
+            type: string
+            format: date-time
+            description: Date and time when the message was sent.
+  channelTwo:
+    publish:
+      summary: This is the second sample channel
+      operationId: messageRead
+      message:
+        name: SecondMessage
+        payload:
+          id:
+            type: integer
+            minimum: 0
+            description: Id of the channel
+          sentAt:
+            type: string
+            format: date-time
+            description: Date and time when the message was sent.
